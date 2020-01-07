@@ -66,6 +66,12 @@ func main() {
 		}
 		fmt.Printf("There are %d pods in the cluster\n", len(pods.Items))
 
+		svcs, err := clientset.CoreV1().Services("").List(metav1.ListOptions{})
+		if err != nil {
+			panic(err.Error())
+		}
+		fmt.Printf("There are %d services in the cluster\n", len(svcs.Items))
+
 		// Examples for error handling:
 		// - Use helper functions like e.g. errors.IsNotFound()
 		// - And/or cast to StatusError and use its properties like e.g. ErrStatus.Message
